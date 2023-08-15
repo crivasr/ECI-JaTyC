@@ -1,0 +1,15 @@
+typestate FileServer {
+    CLOSED = {
+        boolean start(java.net.Socket): <true: OPEN, false: CLOSED>,
+        drop: end
+    }
+
+    OPEN = {
+        boolean hasRequest(): <true: HANDLEABLE, false: OPEN>,
+        void close(): CLOSED
+    }
+
+    HANDLEABLE = {
+        void handleRequest(): OPEN
+    }
+}

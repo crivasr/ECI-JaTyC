@@ -1,0 +1,20 @@
+typestate FileClient2 {
+    CLOSED = {
+        boolean start(): <true: OPEN, false: CLOSED>,
+        drop: end
+    }
+
+    OPEN = {
+        void close(): CLOSED,
+        void request(String): REQUESTING
+    }
+
+    REQUESTING = {
+        boolean eof(): <true: OPEN, false: READABLE>
+    }
+
+    READABLE = {
+        int read(): REQUESTING,
+        String readLine(): REQUESTING
+    }
+}
